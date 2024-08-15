@@ -1,8 +1,8 @@
-package cc.maid.lms.Controller;
+package cc.maid.lms.controller;
 
 
-import cc.maid.lms.Model.BorrowingRecord;
-import cc.maid.lms.Service.BorrowingService;
+import cc.maid.lms.model.BorrowingRecord;
+import cc.maid.lms.service.BorrowingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

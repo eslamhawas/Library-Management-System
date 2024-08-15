@@ -1,9 +1,10 @@
-package cc.maid.lms.Exception;
+package cc.maid.lms.exception;
 
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -15,15 +16,6 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<Map<String, String>> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
-        Map<String, String> errors = new HashMap<>();
-        errors.put("error", "Data integrity violation");
-        errors.put("message", "Failed to add borrowing record. Ensure the Patron and Book exist.");
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
-    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
@@ -44,6 +36,8 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
     }
+
+
 
 
     @ExceptionHandler(Exception.class)

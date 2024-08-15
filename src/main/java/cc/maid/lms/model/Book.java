@@ -1,14 +1,21 @@
-package cc.maid.lms.Model;
+package cc.maid.lms.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Book {
 
@@ -38,12 +45,12 @@ public class Book {
     private LocalDate publishedDate;
 
     @Column(nullable = false)
-    @NotBlank(message = "Price cannot be empty")
     private double price;
 
     private String genre;
 
     @OneToMany(mappedBy = "book")
+    @JsonIgnore
     private List<BorrowingRecord> borrowingRecords;
 
 }

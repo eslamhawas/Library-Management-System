@@ -1,8 +1,8 @@
-package cc.maid.lms.Controller;
+package cc.maid.lms.controller;
 
-import cc.maid.lms.DTO.PatronDTO;
-import cc.maid.lms.Model.Patron;
-import cc.maid.lms.Service.PatronService;
+import cc.maid.lms.dto.PatronDTO;
+import cc.maid.lms.model.Patron;
+import cc.maid.lms.service.PatronService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

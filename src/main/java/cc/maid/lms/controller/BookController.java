@@ -1,8 +1,8 @@
-package cc.maid.lms.Controller;
+package cc.maid.lms.controller;
 
-import cc.maid.lms.DTO.BookDTO;
-import cc.maid.lms.Model.Book;
-import cc.maid.lms.Service.BookService;
+import cc.maid.lms.dto.CreateBookDTO;
+import cc.maid.lms.model.Book;
+import cc.maid.lms.service.BookService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,15 +38,15 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<Book> createBook(@Valid @RequestBody BookDTO bookDTO) {
+    public ResponseEntity<Book> createBook(@Valid @RequestBody CreateBookDTO createBookDTO) {
         Book book = new Book();
-        book.setISBN(bookDTO.ISBN());
-        book.setTitle(bookDTO.title());
-        book.setAuthor(bookDTO.author());
-        book.setPublisher(bookDTO.publisher());
-        book.setPublishedDate(bookDTO.publishedDate());
-        book.setPrice(bookDTO.price());
-        book.setGenre(bookDTO.genre());
+        book.setISBN(createBookDTO.ISBN());
+        book.setTitle(createBookDTO.title());
+        book.setAuthor(createBookDTO.author());
+        book.setPublisher(createBookDTO.publisher());
+        book.setPublishedDate(createBookDTO.publishedDate());
+        book.setPrice(createBookDTO.price());
+        book.setGenre(createBookDTO.genre());
 
         Book createdBook = bookService.add(book);
 
@@ -60,14 +60,14 @@ public class BookController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable Long id,
-                                           @Valid @RequestBody BookDTO bookDTO) {
+                                           @Valid @RequestBody CreateBookDTO createBookDTO) {
         Book book = bookService.getById(id);
-        book.setTitle(bookDTO.title());
-        book.setAuthor(bookDTO.author());
-        book.setPublisher(bookDTO.publisher());
-        book.setPublishedDate(bookDTO.publishedDate());
-        book.setPrice(bookDTO.price());
-        book.setGenre(bookDTO.genre());
+        book.setTitle(createBookDTO.title());
+        book.setAuthor(createBookDTO.author());
+        book.setPublisher(createBookDTO.publisher());
+        book.setPublishedDate(createBookDTO.publishedDate());
+        book.setPrice(createBookDTO.price());
+        book.setGenre(createBookDTO.genre());
 
         Book updatedBook = bookService.update(book);
 

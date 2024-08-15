@@ -1,8 +1,8 @@
-package cc.maid.lms.Service;
+package cc.maid.lms.service;
 
-import cc.maid.lms.Exception.RecordNotFoundException;
-import cc.maid.lms.Model.Book;
-import cc.maid.lms.Repository.BookRepo;
+import cc.maid.lms.exception.RecordNotFoundException;
+import cc.maid.lms.model.Book;
+import cc.maid.lms.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,34 +12,39 @@ import java.util.List;
 @Service
 public class BookService {
 
-    private BookRepo _bookRepo;
+    private BookRepository bookRepository;
 
     @Autowired
-    public BookService(BookRepo bookRepo) {
-        _bookRepo = bookRepo;
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
     }
 
+    @Transactional(readOnly = true)
     public List<Book> getAll() {
-        return _bookRepo.findAll();
+        return bookRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Book getById(Long id) {
-        return _bookRepo.findById(id).orElseThrow(() ->
+        return bookRepository.findById(id).orElseThrow(() ->
                new RecordNotFoundException("There is no book with this id: " + id));
     }
 
     @Transactional(rollbackFor = Exception.class)
     public Book add(Book book) {
-        return _bookRepo.save(book);
+        return bookRepository.save(book);
     }
 
     @Transactional(rollbackFor = Exception.class)
     public Book update(Book book) {
-        return _bookRepo.save(book);
+        return bookRepository.save(book);
     }
 
     @Transactional(rollbackFor = Exception.class)
     public void delete(Book book) {
-        _bookRepo.delete(book);
+        bookRepository.delete(book);
     }
+
+
+
 }
