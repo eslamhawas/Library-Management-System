@@ -46,6 +46,8 @@ A comprehensive Library Management System built with Java, Spring Boot, and MySQ
  ┃ ┣ 📂 java
  ┃ ┃ ┣ 📂 cc.maid.lms
  ┃ ┃ ┃ ┣ 📂 controller   # REST Controllers
+ ┃ ┃ ┃ ┣ 📂 dto          # DTOS
+ ┃ ┃ ┃ ┣ 📂 exception    # Exception Files and Global Exception Handler
  ┃ ┃ ┃ ┣ 📂 model        # Entities (Book, Patron, Borrowing Record)
  ┃ ┃ ┃ ┣ 📂 repository   # Repositories (JPA Repositories for database operations)
  ┃ ┃ ┃ ┗ 📂 service      # Services (Business Logic)
