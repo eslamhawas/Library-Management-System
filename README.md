@@ -9,6 +9,7 @@ A Spring Boot application designed to manage library operations, including manag
 - Handle borrowing records, including recording the borrowing and returning of books.
 - Centralized exception handling and transactional operations.
 - RESTful API endpoints for interacting with the library management system.
+- Caching: Utilize Spring's caching mechanisms to cache frequently accessed data, such as book details or patron information, to improve system performance.
 
 ## Future Work
 
@@ -17,7 +18,6 @@ A Spring Boot application designed to manage library operations, including manag
 - **Using DTO Mapper**: Integrate a DTO mapper (e.g., MapStruct) for better separation between entities and DTOs, improving code maintainability and clarity.
 - **Security**: Implement basic authentication or JWT-based authorization to protect the API endpoints.
 - **Aspects**: Implement logging using Aspect-Oriented Programming (AOP) to log method calls, exceptions, and performance metrics of certain operations like book additions, updates, and patron transactions.
-- **Caching**: Utilize Spring's caching mechanisms to cache frequently accessed data, such as book details or patron information, to improve system performance.
 
 
 ## Technologies Used

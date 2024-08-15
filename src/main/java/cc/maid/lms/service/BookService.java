@@ -4,6 +4,9 @@ import cc.maid.lms.exception.RecordNotFoundException;
 import cc.maid.lms.model.Book;
 import cc.maid.lms.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +28,7 @@ public class BookService {
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(value = "books", key = "#id")
     public Book getById(Long id) {
         return bookRepository.findById(id).orElseThrow(() ->
                new RecordNotFoundException("There is no book with this id: " + id));
@@ -36,11 +40,13 @@ public class BookService {
     }
 
     @Transactional(rollbackFor = Exception.class)
+    @CachePut(value = "books", key = "#book.id")
     public Book update(Book book) {
         return bookRepository.save(book);
     }
 
     @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(value = "books", key = "#book.id")
     public void delete(Book book) {
         bookRepository.delete(book);
     }

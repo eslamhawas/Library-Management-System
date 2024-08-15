@@ -4,7 +4,9 @@ import cc.maid.lms.exception.RecordNotFoundException;
 import cc.maid.lms.model.Book;
 import cc.maid.lms.model.BorrowingRecord;
 import cc.maid.lms.model.Patron;
+import cc.maid.lms.repository.BookRepository;
 import cc.maid.lms.repository.BorrowingRepository;
+import cc.maid.lms.repository.PatronRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,6 +29,12 @@ public class BorrowingServiceTest {
 
     @Mock
     private BorrowingRepository borrowingRepository;
+
+    @Mock
+    private PatronRepository patronRepository;
+
+    @Mock
+    private BookRepository bookRepository;
 
     @InjectMocks
     private BorrowingService borrowingService;
@@ -57,6 +65,8 @@ public class BorrowingServiceTest {
     @DisplayName("Add should successfully save a new borrowing record")
     public void add_ShouldSaveNewBorrowingRecord() {
         when(borrowingRepository.save(any(BorrowingRecord.class))).thenReturn(borrowingRecord);
+        when(bookRepository.findById(book.getId())).thenReturn(Optional.of(book));
+        when(patronRepository.findById(patron.getId())).thenReturn(Optional.of(patron));
 
         BorrowingRecord savedRecord = borrowingService.add(patron.getId(), book.getId());
 

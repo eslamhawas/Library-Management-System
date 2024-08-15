@@ -4,6 +4,9 @@ import cc.maid.lms.exception.RecordNotFoundException;
 import cc.maid.lms.model.Patron;
 import cc.maid.lms.repository.PatronRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +27,7 @@ public class PatronService {
         return patronRepository.findAll();
     }
 
+    @Cacheable(value = "patrons", key = "#id")
     public Patron getById(Long id) {
          return patronRepository.findById(id).orElseThrow(() ->
                  new RecordNotFoundException(""+id));
@@ -33,10 +37,12 @@ public class PatronService {
         return patronRepository.save(patron);
     }
 
+    @CachePut(value = "patrons", key = "#patron.id")
     public Patron update(Patron patron) {
         return patronRepository.save(patron);
     }
 
+    @CacheEvict(value = "patrons", key = "#patron.id")
     public void delete(Patron patron) {
         patronRepository.delete(patron);
     }
